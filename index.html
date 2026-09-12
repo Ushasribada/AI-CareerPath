@@ -1,0 +1,624 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Career Skill Gap Analyzer</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>AI</span> CareerPath
+    </div>
+
+    <nav>
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#analysis">
+            Analysis
+        </a>
+
+        <a href="#trends">
+            Market Trends
+        </a>
+
+        <a href="#recommendation">
+            Recommendation
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="hero"
+         id="home">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            Explainable AI • NLP • Job Market Intelligence
+        </div>
+
+        <h1>
+
+            Discover Your
+            <span>Career Path</span>
+
+        </h1>
+
+        <p>
+
+            Analyze your resume, identify skill gaps, understand current
+            job-market trends, and receive a personalized career
+            recommendation using Explainable Artificial Intelligence.
+
+        </p>
+
+        <button class="primary-btn"
+                onclick="scrollToAnalysis()">
+
+            Start Career Analysis
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= RESUME UPLOAD ================= -->
+
+<section class="upload-section"
+         id="analysis">
+
+    <div class="section-heading">
+
+        <p class="small-title">
+            STEP 01
+        </p>
+
+        <h2>
+            Analyze Your Resume
+        </h2>
+
+        <p>
+
+            Upload your resume and our NLP-based system will identify
+            your technical skills and build your candidate profile.
+
+        </p>
+
+    </div>
+
+
+    <div class="upload-card">
+
+        <div class="upload-icon">
+            📄
+        </div>
+
+        <h3>
+            Upload Resume
+        </h3>
+
+        <p>
+            Supported formats: PDF, DOCX
+        </p>
+
+        <input
+            type="file"
+            id="resumeFile"
+            accept=".pdf,.docx"
+        >
+
+        <button
+            class="primary-btn"
+            onclick="analyzeResume()">
+
+            Analyze Resume
+
+        </button>
+
+        <p id="fileName"
+           class="file-name">
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<section class="dashboard"
+         id="dashboard">
+
+
+    <div class="section-heading">
+
+        <p class="small-title">
+            STEP 02
+        </p>
+
+        <h2>
+            Candidate Skill Profile
+        </h2>
+
+        <p>
+
+            Skills extracted from your resume using Natural Language Processing.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- ================= PROFILE CARDS ================= -->
+
+    <div class="profile-grid">
+
+
+        <div class="profile-card">
+
+            <div class="card-icon">
+                👤
+            </div>
+
+            <h3>
+                Candidate
+            </h3>
+
+            <p id="candidateName">
+                Resume Candidate
+            </p>
+
+        </div>
+
+
+
+        <div class="profile-card">
+
+            <div class="card-icon">
+                🧠
+            </div>
+
+            <h3>
+                Skills Detected
+            </h3>
+
+            <p id="skillCount">
+                0 Skills
+            </p>
+
+        </div>
+
+
+
+        <div class="profile-card">
+
+            <div class="card-icon">
+                🎯
+            </div>
+
+            <h3>
+                Recommended Role
+            </h3>
+
+            <p id="roleCard">
+                Data Analyst
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================= DETECTED SKILLS ================= -->
+
+    <div class="content-card">
+
+        <div class="card-title">
+
+            <div>
+
+                <p class="small-title">
+                    NLP RESULT
+                </p>
+
+                <h3>
+                    Detected Skills
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <div id="detectedSkills"
+             class="skill-container">
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= SKILL GAP ================= -->
+
+    <div class="content-card">
+
+        <div class="card-title">
+
+            <div>
+
+                <p class="small-title">
+                    STEP 03
+                </p>
+
+                <h3>
+                    Skill Gap Analysis
+                </h3>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="match-section">
+
+            <div class="match-info">
+
+
+                <div>
+
+                    <p>
+                        Recommended Role
+                    </p>
+
+                    <h2 id="recommendedRole">
+                        Data Analyst
+                    </h2>
+
+                </div>
+
+
+
+                <div class="match-score">
+
+                    <span id="matchPercentage">
+                        0%
+                    </span>
+
+                    <small>
+                        Skill Match
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="progress-background">
+
+                <div id="progressBar"
+                     class="progress-bar">
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="gap-columns">
+
+
+            <div class="gap-box matching">
+
+                <h4>
+                    ✓ Matching Skills
+                </h4>
+
+                <div id="matchingSkills"
+                     class="skill-container">
+                </div>
+
+            </div>
+
+
+
+            <div class="gap-box missing">
+
+                <h4>
+                    ⚠ Missing Skills
+                </h4>
+
+                <div id="missingSkills"
+                     class="skill-container">
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ================= MARKET TRENDS ================= -->
+
+<section class="trends-section"
+         id="trends">
+
+
+    <div class="section-heading">
+
+        <p class="small-title">
+            STEP 04
+        </p>
+
+        <h2>
+            Job Market Skill Trends
+        </h2>
+
+        <p>
+
+            Current demand for skills identified from the job-market dataset.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- Dynamic market trends will be inserted here -->
+
+    <div class="trend-card"
+         id="marketTrendsContainer">
+
+        <p>
+            Market trends will appear after resume analysis.
+        </p>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ================= RECOMMENDATION ================= -->
+
+<section class="recommendation-section"
+         id="recommendation">
+
+
+    <div class="section-heading">
+
+        <p class="small-title">
+            STEP 05
+        </p>
+
+        <h2>
+            Explainable Career Recommendation
+        </h2>
+
+        <p>
+
+            Understand why the system recommends a particular career path.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="recommendation-card">
+
+
+        <div class="recommendation-main">
+
+
+            <div class="target-icon">
+                🎯
+            </div>
+
+
+            <div>
+
+                <p class="small-title">
+                    RECOMMENDED CAREER
+                </p>
+
+                <h2 id="finalRole">
+                    Data Analyst
+                </h2>
+
+                <p id="recommendationSummary">
+
+                    The recommendation will be generated from your
+                    resume skills and job-market information.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- Dynamic explanation -->
+
+        <div class="explanation">
+
+            <h3>
+                Why this recommendation?
+            </h3>
+
+
+            <div class="reason">
+
+                <span>
+                    ✓
+                </span>
+
+                <p id="explanation">
+
+                    Explanation will appear after resume analysis.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================= TOP RECOMMENDATIONS ================= -->
+
+    <div class="content-card"
+         style="margin-top: 30px;">
+
+        <div class="card-title">
+
+            <div>
+
+                <p class="small-title">
+                    AI RESULTS
+                </p>
+
+                <h3>
+                    Top Career Recommendations
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <div id="recommendationsContainer">
+
+            <p>
+                Top recommendations will appear after analysis.
+            </p>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ================= LEARNING PATH ================= -->
+
+<section class="learning-section">
+
+
+    <div class="section-heading">
+
+        <p class="small-title">
+            STEP 06
+        </p>
+
+        <h2>
+            Personalized Learning Path
+        </h2>
+
+        <p>
+
+            Recommended skills to learn based on your identified gaps.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- Dynamic learning roadmap -->
+
+    <div class="learning-path"
+         id="learningRoadmap">
+
+        <div class="learning-step">
+
+            <div class="number">
+                01
+            </div>
+
+            <div>
+
+                <h3>
+                    Waiting for analysis
+                </h3>
+
+                <p>
+                    Upload your resume to generate your personalized
+                    skill-learning roadmap.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+    <div class="footer-logo">AI CareerPath</div>
+
+    <p>
+        Explainable AI-Based Skill Gap Analysis and Dynamic Career Path Recommendation
+    </p>
+
+    <p class="copyright">
+        M.Tech Project • NLP • Machine Learning • Explainable AI
+    </p>
+</footer>
